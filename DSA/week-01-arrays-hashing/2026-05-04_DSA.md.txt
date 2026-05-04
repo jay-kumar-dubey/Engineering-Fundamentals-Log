@@ -1,0 +1,53 @@
+# DSA Log — May 4, 2026
+
+## Q1: Contains Duplicate (Easy) — Arrays & Hashing
+**Problem:** Return true if any value appears more than once.
+
+**Approach:**
+- Attempt 1: Sort + adjacent check → O(n log n), correct but suboptimal
+- Final: HashSet — iterate, check if num in seen, add if not → O(n) time, O(n) space
+
+**Key Pattern:** "Have I seen this before?" → HashSet
+
+**Code:**
+```python
+class Solution:
+    def hasDuplicate(self, nums: List[int]) -> bool:
+        seen = set()
+        for num in nums:
+            if num in seen:
+                return True
+            seen.add(num)
+        return False
+```
+
+---
+
+## Q2: Valid Anagram (Easy) — Arrays & Hashing
+**Problem:** Return true if two strings are anagrams.
+
+**Approach:**
+- Fixed 26-element count array — increment for s[i], decrement for t[i]
+- If all zeros at end → anagram → O(n) time, O(1) space
+
+**Key Pattern:** Character frequency comparison → 26-element array trick
+
+**Code:**
+```python
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+        count = [0] * 26
+        for i in range(len(s)):
+            count[ord(s[i]) - ord('a')] += 1
+            count[ord(t[i]) - ord('a')] -= 1
+        for val in count:
+            if val != 0:
+                return False
+        return True
+```
+
+---
+
+**Observation:** Both problems use the same core idea — hash structure for frequency/existence tracking. That's the hashing chapter's shape.
